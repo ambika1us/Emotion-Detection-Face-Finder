@@ -14,7 +14,7 @@ A real-time facial emotion recognition app built with **TensorFlow**, **OpenCV**
 - 🤖 **Emotion Classification** with a custom-trained deep learning model
 - 🎯 **Real-time camera capture** or image upload
 - 🎨 **Dynamic label styling** with emotion-specific color overlays
-- 📈 Optional: Show top 3 emotion confidences or prediction bar chart
+
 
 ---
 
@@ -30,8 +30,8 @@ A real-time facial emotion recognition app built with **TensorFlow**, **OpenCV**
 No fuss! Just push this folder to your GitHub repo and connect it to Streamlit Cloud. Streamlit will handle the environment setup and hosting automatically.
 Make sure:
 - runtime.txt contains python-3.10
-- Your model and Haar cascade file are included
-- Your requirements.txt reflects accurate versions
+- model and Haar cascade file are included
+- requirements.txt reflects accurate versions
 
 ## 🤔 Example Model Prediction
 Input: Image of a neutral face
