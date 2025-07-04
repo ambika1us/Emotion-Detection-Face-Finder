@@ -22,10 +22,10 @@ emotion_colors = {
 }
 
 try:
-    odia_font = ImageFont.truetype("fonts/NotoSansOriya-Regular.ttf", size=32)
-    hindi_font = ImageFont.truetype("fonts/NotoSansDevanagari-Regular.ttf", size=32)
+    odia_font = ImageFont.truetype("fonts/NotoSansOriya-Regular.ttf", size=24)
+    hindi_font = ImageFont.truetype("fonts/NotoSansDevanagari-Regular.ttf", size=24)
 except:
-    odia_font = hindi_font = ImageFont.load_default("fonts/NotoSans-Regular.ttf", size=32)
+    odia_font = hindi_font = ImageFont.load_default()
 
 
 # --- Helper functions ---
@@ -87,17 +87,17 @@ if img_data is not None:
 
     st.image(np.array(pil_img), caption="🧠 Emotion(s) Detected", use_container_width=True)
 
+from feedback_logger import log_feedback_to_gsheet
+
 with st.sidebar.form("feedback_form"):
     st.subheader("💬 User Feedback")
     name = st.text_input("Your name (optional)")
-    comments = st.text_area("What did you like? What could be better?")
-    rating = st.slider("Rate the app", min_value=1, max_value=5, value=3)
+    comments = st.text_area("Your thoughts about this app:")
+    #rating = st.slider("Rate the app", 1, 5, 4)
+    rating = st.radio("😎 How did you feel?", ["😍 Positive", "👍 Neutral", "😡 Negative"])
 
-    submitted = st.form_submit_button("Submit Feedback")
-    if submitted:
-        st.success("✅ Thank you for your feedback!")
-        # Optionally save feedback or log it here
-        print(f"Feedback from {name or 'Anonymous'}: {comments} (Rating: {rating})")
+    submit = st.form_submit_button("Submit")
 
-with open("Feedback/feedback_log.txt", "a", encoding="utf-8") as f:
-    f.write(f"{name or 'Anonymous'} | Rating: {rating} | Comments: {comments}\n")
+    if submit:
+        log_feedback_to_gsheet(name, rating, comments)
+        st.success("✅ Thanks for sharing your feedback!")
